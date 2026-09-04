@@ -44,7 +44,7 @@ export default function buildDom(trials, letters) {
           }
         });
       } else {
-        myInput.addEventListener("keydown", (event) => {
+        document.addEventListener("keydown", (event) => {
           if (event.key === "Enter" && event.target.value !== "") {
             checkWord();
           }

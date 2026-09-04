@@ -37,7 +37,7 @@ function checkWord(){
     checkTrial(correctWord, trial);
     trial++;
   } else if(checkBtn.previousElementSibling.tagName !== "P"){
-    showWarning();
+    showWarning(trial);
   }
   checkBtn.disabled = true;
 }

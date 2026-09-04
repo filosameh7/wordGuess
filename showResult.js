@@ -25,19 +25,21 @@ function reset() {
   }
 }
 
-function showWarning() {
+function showWarning(trial) {
   const checkBtn = document.getElementsByClassName("check")[0];
   let warning = document.createElement("p");
   warning.textContent = "Word Doesn't Exist!";
   warning.classList.add("warning");
   document.getElementsByClassName("trials")[0].insertBefore(warning, checkBtn);
-  document.addEventListener("keydown", (event) => {
-    if (
-      event.key === "Backspace" &&
-      checkBtn.previousElementSibling.tagName === "P"
-    )
-      checkBtn.previousElementSibling.remove();
-  });
+  document
+    .getElementById(`trial-${trial}`)
+    .lastElementChild.addEventListener("keydown", (event) => {
+      if (
+        event.key === "Backspace" &&
+        checkBtn.previousElementSibling.tagName === "P"
+      )
+        checkBtn.previousElementSibling.remove();
+    });
 }
 
 export { showMsg, reset, showWarning };
