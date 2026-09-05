@@ -42,6 +42,7 @@ export default function buildDom(trials, letters) {
           if (event.key === "Backspace" && event.target.value === "") {
             enableInput(myInput.previousElementSibling);
             myInput.previousElementSibling.value = "";
+            myInput.previousElementSibling.classList.remove("done");
             disableInput(myInput);
             myInput.classList.remove("done");
           }
@@ -49,7 +50,8 @@ export default function buildDom(trials, letters) {
       }
 
       myInput.addEventListener("input", () => {
-        if (!/[a-z]|[A-Z]/.test(myInput.value)) myInput.value = "";
+        if (!/[a-z]|[A-Z]/.test(myInput.value)) 
+          myInput.value = "";
         else {
           myInput.value = myInput.value.toUpperCase();
           if (j !== letters - 1) {
@@ -59,8 +61,15 @@ export default function buildDom(trials, letters) {
           }
         }
         if (j === letters - 1) {
-          if (myInput.value !== "") checkBtn.disabled = false;
-          else checkBtn.disabled = true;
+          if (myInput.value !== "") {
+            checkBtn.disabled = false;
+            hintButton.disabled = true;
+          }
+          else {
+            checkBtn.disabled = true;
+            if(hintButton.textContent.split(" ")[0] !== "0")
+              hintButton.disabled = false;
+          }
         }
       });
       if (i !== 0 || j !== 0) {

@@ -2,7 +2,7 @@ import buildDom from "./src/buildDom.js";
 import { checkTrial } from "./src/checkTrial&Win.js";
 import { reset, showWarning } from "./src/showResult&reset.js";
 import { trialWord } from "./src/checkLetter.js";
-import { giveHint, resetHintButton} from "./src/giveHint.js";
+import { giveHint, resetHintButton } from "./src/giveHint.js";
 
 let allWords = [];
 let hints = 2;
@@ -39,6 +39,8 @@ function checkWord() {
   if (allWords.includes(trialWord(trial))) {
     checkTrial(correctWord, trial);
     trial++;
+    if (hints !== 0) 
+      myBtns.lastElementChild.disabled = false;
   } else if (myBtns.previousElementSibling.tagName !== "P") {
     showWarning(trial);
   }

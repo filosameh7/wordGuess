@@ -7,14 +7,16 @@ function giveHint(trial, hints, correctWord) {
   );
   for (let i = 0; i < trialLetters.length; i++) {
     let inputClasses = Array.from(trialLetters[i].classList);
-    if (!inputClasses.includes("disableIt") && !inputClasses.includes("done")) {
+    if (inputClasses.length === 0) {
       trialLetters[i].value = correctWord[i];
       if (i < 4) {
         trialLetters[i].disabled = true;
         trialLetters[i].classList.add("done");
         enableInput(trialLetters[i].nextElementSibling);
-      } else if (i === 4) 
+      } else if (i === 4) {
         hintBtn.previousElementSibling.disabled = false;
+        hintBtn.disabled = true;
+      }
       break;
     }
   }
