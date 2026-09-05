@@ -5,11 +5,10 @@ function giveHint(trial, hints, correctWord) {
   let trialLetters = Array.from(
     document.getElementById(`trial-${trial}`).children,
   );
+  console.log("from giveHint");
   for (let i = 0; i < trialLetters.length; i++) {
     let inputClasses = Array.from(trialLetters[i].classList);
     if (!inputClasses.includes("disableIt") && !inputClasses.includes("done")) {
-      console.log(trial);
-      console.log(correctWord[i])
       trialLetters[i].value = correctWord[i];
       if (i < 4) {
         trialLetters[i].disabled = true;
