@@ -1,8 +1,8 @@
-import buildDom from "./buildDom.js";
-import { checkTrial } from "./checkTrial&Win.js";
-import { reset, showWarning } from "./showResult&reset.js";
-import { trialWord } from "./checkLetter.js";
-import giveHint from "./giveHint.js";
+import buildDom from "./src/buildDom.js";
+import { checkTrial } from "./src/checkTrial&Win.js";
+import { reset, showWarning } from "./src/showResult&reset.js";
+import { trialWord } from "./src/checkLetter.js";
+import giveHint from "./src/giveHint.js";
 
 let allWords = [];
 let hints = 2;
@@ -70,4 +70,4 @@ document.addEventListener("keydown", (event) => {
   }
 });
 
-export { checkWord, giveHint };
+export { checkWord };

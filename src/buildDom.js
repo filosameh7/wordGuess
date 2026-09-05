@@ -1,5 +1,5 @@
 import { disableInput, enableInput } from "./control_Input.js";
-import { checkWord, giveHint } from "./main.js";
+import { checkWord } from "../main.js";
 
 export default function buildDom(trials, letters) {
   let trialsCont = document.getElementsByClassName("trials")[0];
