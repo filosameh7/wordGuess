@@ -36,7 +36,6 @@ function checkWin(correctLetters, trial, correctWord) {
   } else if (trial !== 5) {
     enableInput(document.getElementById(`trial-${trial + 1}`).firstChild);
   } else {
-    console.log(trial);
     showMsg(
       `No Problem! Try Again<br>The Correct Word is <span style="color:green">${correctWord}</span>`,
     );

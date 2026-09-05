@@ -2,7 +2,7 @@ import buildDom from "./src/buildDom.js";
 import { checkTrial } from "./src/checkTrial&Win.js";
 import { reset, showWarning } from "./src/showResult&reset.js";
 import { trialWord } from "./src/checkLetter.js";
-import giveHint from "./src/giveHint.js";
+import { giveHint, resetHintButton} from "./src/giveHint.js";
 
 let allWords = [];
 let hints = 2;
@@ -60,6 +60,7 @@ playAgain.addEventListener("click", () => {
   correctWord = randomWord();
   confetti.stop();
   hints = 2;
+  resetHintButton(hints);
 });
 
 // Enter = checkWord (UserFriendly)

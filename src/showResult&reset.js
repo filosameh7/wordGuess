@@ -27,7 +27,6 @@ function reset() {
 
 function showWarning(trial) {
   const myBtns = document.getElementsByClassName("buttons")[0];
-  console.log(myBtns);
   let warning = document.createElement("p");
   warning.textContent = "Word Doesn't Exist!";
   warning.classList.add("warning");
