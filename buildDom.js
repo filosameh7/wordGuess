@@ -1,14 +1,24 @@
-import { disableInput,enableInput } from "./control_Input.js";
-import { checkWord } from "./main.js";
+import { disableInput, enableInput } from "./control_Input.js";
+import { checkWord, giveHint } from "./main.js";
 
 export default function buildDom(trials, letters) {
   let trialsCont = document.getElementsByClassName("trials")[0];
+
+  let myBtns = document.createElement("div");
+  myBtns.classList.add("buttons");
 
   let checkBtn = document.createElement("button");
   checkBtn.textContent = "Check Word";
   checkBtn.classList.add("check");
   checkBtn.disabled = true;
   checkBtn.addEventListener("click", () => checkWord());
+
+  let hintButton = document.createElement("button");
+  hintButton.textContent = "2 Hints";
+  hintButton.classList.add("hint");
+
+  myBtns.appendChild(checkBtn);
+  myBtns.appendChild(hintButton);
 
   for (let i = 0; i < trials; i++) {
     let myDiv = document.createElement("div");
@@ -37,19 +47,6 @@ export default function buildDom(trials, letters) {
           }
         });
       }
-      if (j !== letters - 1) {
-        myInput.addEventListener("keydown", (event) => {
-          if (event.key === "Enter" && event.target.value !== "") {
-            enableInput(myInput.nextElementSibling);
-          }
-        });
-      } else {
-        document.addEventListener("keydown", (event) => {
-          if (event.key === "Enter" && event.target.value !== "") {
-            checkWord();
-          }
-        });
-      }
 
       myInput.addEventListener("input", () => {
         if (!/[a-z]|[A-Z]/.test(myInput.value)) myInput.value = "";
@@ -62,8 +59,7 @@ export default function buildDom(trials, letters) {
           }
         }
         if (j === letters - 1) {
-          if (myInput.value !== "") 
-            checkBtn.disabled = false;
+          if (myInput.value !== "") checkBtn.disabled = false;
           else checkBtn.disabled = true;
         }
       });
@@ -77,5 +73,6 @@ export default function buildDom(trials, letters) {
 
     trialsCont.appendChild(myDiv);
   }
-  trialsCont.appendChild(checkBtn);
+  
+  trialsCont.appendChild(myBtns);
 }

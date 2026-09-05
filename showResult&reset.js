@@ -26,19 +26,20 @@ function reset() {
 }
 
 function showWarning(trial) {
-  const checkBtn = document.getElementsByClassName("check")[0];
+  const myBtns = document.getElementsByClassName("buttons")[0];
+  console.log(myBtns);
   let warning = document.createElement("p");
   warning.textContent = "Word Doesn't Exist!";
   warning.classList.add("warning");
-  document.getElementsByClassName("trials")[0].insertBefore(warning, checkBtn);
+  document.getElementsByClassName("trials")[0].insertBefore(warning, myBtns);
   document
     .getElementById(`trial-${trial}`)
     .lastElementChild.addEventListener("keydown", (event) => {
       if (
         event.key === "Backspace" &&
-        checkBtn.previousElementSibling.tagName === "P"
+        myBtns.previousElementSibling.tagName === "P"
       )
-        checkBtn.previousElementSibling.remove();
+        myBtns.previousElementSibling.remove();
     });
 }
 

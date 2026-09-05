@@ -1,9 +1,11 @@
 import buildDom from "./buildDom.js";
-import { checkTrial } from "./checkTrial_Win.js";
-import { reset, showWarning } from "./showResult.js";
+import { checkTrial } from "./checkTrial&Win.js";
+import { reset, showWarning } from "./showResult&reset.js";
 import { trialWord } from "./checkLetter.js";
+import giveHint from "./giveHint.js";
 
 let allWords = [];
+let hints = 2;
 let trial = 1;
 const trials = 5;
 const letters = 5;
@@ -31,16 +33,24 @@ fetchWords();
 buildDom(trials, letters);
 
 // check each trial call
-const checkBtn = document.getElementsByClassName("check")[0];
-function checkWord(){
-  if(allWords.includes(trialWord(trial))){
+const myBtns = document.getElementsByClassName("buttons")[0];
+const checkBtn = document.querySelector(".check");
+function checkWord() {
+  if (allWords.includes(trialWord(trial))) {
     checkTrial(correctWord, trial);
     trial++;
-  } else if(checkBtn.previousElementSibling.tagName !== "P"){
+  } else if (myBtns.previousElementSibling.tagName !== "P") {
     showWarning(trial);
   }
   checkBtn.disabled = true;
 }
+
+// Hint
+const hintBtn = myBtns.lastElementChild;
+hintBtn.addEventListener("click", () => {
+  hints--;
+  giveHint(trial, hints, correctWord);
+});
 
 // Handle playing Again
 let playAgain = document.querySelector("#result button");
@@ -49,6 +59,15 @@ playAgain.addEventListener("click", () => {
   trial = 1;
   correctWord = randomWord();
   confetti.stop();
+  hints = 2;
 });
 
-export { checkWord };
+// Enter = checkWord (UserFriendly)
+document.addEventListener("keydown", (event) => {
+  let lastInput = document.getElementById(`trial-${trial}`).lastElementChild;
+  if (event.key === "Enter" && lastInput.value !== "") {
+    checkWord();
+  }
+});
+
+export { checkWord, giveHint };

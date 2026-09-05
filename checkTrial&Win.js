@@ -1,6 +1,6 @@
 import { checkExistence, checkPlace } from "./checkLetter.js";
 import { enableInput } from "./control_Input.js";
-import { showMsg } from "./showResult.js";
+import { showMsg } from "./showResult&reset.js";
 
 function checkTrial(correctWord, trial) {
   let currentTrial = document.getElementById(`trial-${trial}`);
@@ -14,14 +14,19 @@ function checkTrial(correctWord, trial) {
     }
     let i = +input.id.split("-")[1];
     correctOne = checkPlace(input, i - 1, correctOne);
-    if (Array.from(input.classList).includes("green")) 
-        correctLetters++;
+    if (Array.from(input.classList).includes("green")) correctLetters++;
   }
   for (let input of lettersArr) {
     if (!Array.from(input.classList).includes("green"))
       correctOne = checkExistence(input, correctOne);
   }
-  checkWin(correctLetters, trial, correctWord);
+  let time = 0;
+  if (trial === 5) {
+    time = 200;
+  }
+  setTimeout(() => {
+    checkWin(correctLetters, trial, correctWord);
+  }, time);
 }
 
 function checkWin(correctLetters, trial, correctWord) {
@@ -31,6 +36,7 @@ function checkWin(correctLetters, trial, correctWord) {
   } else if (trial !== 5) {
     enableInput(document.getElementById(`trial-${trial + 1}`).firstChild);
   } else {
+    console.log(trial);
     showMsg(
       `No Problem! Try Again<br>The Correct Word is <span style="color:green">${correctWord}</span>`,
     );
