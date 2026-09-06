@@ -67,7 +67,7 @@ playAgain.addEventListener("click", () => {
 
 // Enter = checkWord (UserFriendly)
 document.addEventListener("keydown", (event) => {
-  let lastInput = document.getElementById(`trial-${trial}`).lastElementChild;
+  let lastInput = document.querySelector(`#trial-${trial} #letter-${letters}`);
   if (event.key === "Enter" && lastInput.value !== "") {
     checkWord();
   }
